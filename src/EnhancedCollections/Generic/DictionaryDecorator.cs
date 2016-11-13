@@ -7,9 +7,9 @@ namespace EnhancedCollections.Generic
     public class DictionaryDecorator<TKey, TValue> : IDictionary<TKey, TValue>
     {
 
-        protected IDictionary _decorated;
+        protected IDictionary<TKey, TValue> _decorated;
 
-        public DictionaryDecorator( IDictionary decorated)
+        public DictionaryDecorator( IDictionary<TKey, TValue> decorated)
         {
             _decorated = decorated; 
         }
