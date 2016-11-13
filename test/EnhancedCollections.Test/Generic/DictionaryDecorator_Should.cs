@@ -20,7 +20,20 @@ namespace EnhancedCollections.Test.Generic
             int val = decorator[5];
 
             mock.Verify( m => m[It.IsAny<int>()], Times.Once);
+        }
 
+        [Fact]
+        public void CallDecoratedIndexerSet()
+        {
+            var mock = new Mock<IDictionary<int, int>>();
+
+            mock.SetupSet( m => m[It.IsAny<int>()] = It.IsAny<int>());
+
+            var decorator = new DictionaryDecorator<int, int>( mock.Object);
+
+            decorator[5] = 5;
+
+            mock.VerifySet( m => m[It.IsAny<int>()] = It.IsAny<int>(), Times.Once);
         }
     }
 }
