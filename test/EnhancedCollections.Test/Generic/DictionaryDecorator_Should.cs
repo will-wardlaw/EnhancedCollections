@@ -35,5 +35,19 @@ namespace EnhancedCollections.Test.Generic
 
             mock.VerifySet( m => m[It.IsAny<int>()] = It.IsAny<int>(), Times.Once);
         }
+
+        [Fact]
+        public void CallDecoratedCount()
+        {
+            var mock = new Mock<IDictionary< int, int>>();
+
+            mock.SetupGet( m => m.Count);
+
+            var decorator = new DictionaryDecorator< int, int>( mock.Object);
+
+            var val = decorator.Count;
+
+            mock.VerifyGet( m => m.Count);
+        }
     }
 }
