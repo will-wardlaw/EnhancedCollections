@@ -18,7 +18,7 @@ namespace EnhancedCollections.Generic
         {
             get
             {
-                throw new NotImplementedException();
+                return _decorated[key];
             }
 
             set
