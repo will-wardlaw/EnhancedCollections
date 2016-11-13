@@ -6,6 +6,14 @@ namespace EnhancedCollections.Generic
 {
     public class DictionaryDecorator<TKey, TValue> : IDictionary<TKey, TValue>
     {
+
+        protected IDictionary _decorated;
+
+        public DictionaryDecorator( IDictionary decorated)
+        {
+            _decorated = decorated; 
+        }
+
         public TValue this[TKey key]
         {
             get
