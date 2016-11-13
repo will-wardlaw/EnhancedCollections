@@ -19,7 +19,7 @@ namespace EnhancedCollections.Test.Generic
 
             int val = decorator[5];
 
-            mock.Verify( m => m[It.IsAny<int>()], Times.Once);
+            mock.VerifyGet( m => m[It.IsAny<int>()], Times.Once);
         }
 
         [Fact]
