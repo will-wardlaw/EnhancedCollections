@@ -13,7 +13,7 @@ namespace EnhancedCollections.Test.Generic
         {
             var mock = new Mock<IDictionary<int, int>>();
 
-            mock.Setup( m => m[It.IsAny<int>()]);
+            mock.SetupGet( m => m[It.IsAny<int>()]);
 
             var decorator = new DictionaryDecorator<int, int>( mock.Object);
 
