@@ -8,14 +8,24 @@ namespace EnhancedCollections.Test.Generic
 {
     public class DictionaryDecorator_Should
     {
+        private Mock<IDictionary<T, V>> GetMock<T, V>()
+        {
+            return new Mock<IDictionary<T, V>>();
+        }
+
+        private DictionaryDecorator<T, V> GetDecorator<T, V>( IDictionary<T, V> decorated)
+        {
+            return new DictionaryDecorator<T, V>( decorated);
+        }
+
         [Fact]
         public void CallDecoratedIndexerGet()
         {
-            var mock = new Mock<IDictionary<int, int>>();
+            var mock = GetMock<int, int>();
 
             mock.SetupGet( m => m[It.IsAny<int>()]);
 
-            var decorator = new DictionaryDecorator<int, int>( mock.Object);
+            var decorator = GetDecorator( mock.Object);
 
             int val = decorator[5];
 
@@ -25,11 +35,11 @@ namespace EnhancedCollections.Test.Generic
         [Fact]
         public void CallDecoratedIndexerSet()
         {
-            var mock = new Mock<IDictionary<int, int>>();
+            var mock = GetMock<int, int>();
 
             mock.SetupSet( m => m[It.IsAny<int>()] = It.IsAny<int>());
 
-            var decorator = new DictionaryDecorator<int, int>( mock.Object);
+            var decorator = GetDecorator( mock.Object);
 
             decorator[5] = 5;
 
@@ -39,11 +49,11 @@ namespace EnhancedCollections.Test.Generic
         [Fact]
         public void CallDecoratedCount()
         {
-            var mock = new Mock<IDictionary< int, int>>();
+            var mock = GetMock<int, int>();
 
             mock.SetupGet( m => m.Count);
 
-            var decorator = new DictionaryDecorator< int, int>( mock.Object);
+            var decorator = GetDecorator( mock.Object);
 
             var val = decorator.Count;
 
