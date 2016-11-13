@@ -1,5 +1,7 @@
 
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using EnhancedCollections.Generic;
 using Moq;
 using Xunit;
@@ -29,7 +31,7 @@ namespace EnhancedCollections.Test.Generic
 
             int val = decorator[5];
 
-            mock.VerifyGet( m => m[It.IsAny<int>()], Times.Once);
+            mock.Verify( m => m[It.IsAny<int>()], Times.Once);
         }
 
         [Fact]
@@ -49,15 +51,40 @@ namespace EnhancedCollections.Test.Generic
         [Fact]
         public void CallDecoratedCount()
         {
-            var mock = GetMock<int, int>();
+            CallDecoratedGetter<int, int, int>( m => m.Count);
+        }
 
-            mock.SetupGet( m => m.Count);
+        [Fact]
+        public void CallDecoratedIsReadOnly()
+        {
+            CallDecoratedGetter<int, int, bool>( m => m.IsReadOnly);
+        }
+
+        [Fact]
+        public void CallDecoratedKeys()
+        {
+            CallDecoratedGetter<int, int, ICollection<int>>( m => m.Keys);
+        }
+
+        [Fact]
+        public void CallDecoratedValues()
+        {
+            CallDecoratedGetter<int, int, ICollection<int>>( m => m.Keys);
+        }
+
+        
+        private void CallDecoratedGetter<TKey, TValue, TProperty>( Expression<Func<IDictionary<TKey, TValue>, TProperty>> getterExpression)
+        {
+            var mock = GetMock<TKey, TValue>();
+
+            mock.SetupGet( getterExpression);
 
             var decorator = GetDecorator( mock.Object);
 
-            var val = decorator.Count;
+            var compiled = getterExpression.Compile();
+            var val = compiled.DynamicInvoke( decorator);
 
-            mock.VerifyGet( m => m.Count);
+            mock.VerifyGet( getterExpression);
         }
     }
 }
