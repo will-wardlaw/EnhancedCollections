@@ -23,7 +23,7 @@ namespace EnhancedCollections.Generic
 
             set
             {
-                throw new NotImplementedException();
+                _decorated[key] = value;
             }
         }
 
@@ -31,7 +31,7 @@ namespace EnhancedCollections.Generic
         {
             get
             {
-                throw new NotImplementedException();
+                return _decorated.Count;
             }
         }
 
@@ -39,7 +39,7 @@ namespace EnhancedCollections.Generic
         {
             get
             {
-                throw new NotImplementedException();
+                return _decorated.IsReadOnly;
             }
         }
 
@@ -47,7 +47,7 @@ namespace EnhancedCollections.Generic
         {
             get
             {
-                throw new NotImplementedException();
+                return _decorated.Keys;
             }
         }
 
@@ -55,63 +55,63 @@ namespace EnhancedCollections.Generic
         {
             get
             {
-                throw new NotImplementedException();
+                return _decorated.Values;
             }
         }
 
         public void Add(KeyValuePair<TKey, TValue> item)
         {
-            throw new NotImplementedException();
+            _decorated.Add( item);
         }
 
         public void Add(TKey key, TValue value)
         {
-            throw new NotImplementedException();
+            _decorated.Add( key, value);
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            _decorated.Clear();
         }
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            throw new NotImplementedException();
+            return _decorated.Contains( item);
         }
 
         public bool ContainsKey(TKey key)
         {
-            throw new NotImplementedException();
+            return _decorated.ContainsKey( key);
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            _decorated.CopyTo( array, arrayIndex);
         }
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _decorated.GetEnumerator();
         }
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
-            throw new NotImplementedException();
+            return _decorated.Remove(item);
         }
 
         public bool Remove(TKey key)
         {
-            throw new NotImplementedException();
+            return _decorated.Remove( key);
         }
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            throw new NotImplementedException();
+            return _decorated.TryGetValue( key, out value);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _decorated.GetEnumerator();
         }
     }
 }
