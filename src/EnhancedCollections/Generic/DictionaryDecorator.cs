@@ -14,7 +14,7 @@ namespace EnhancedCollections.Generic
             _decorated = decorated; 
         }
 
-        public TValue this[TKey key]
+        public virtual TValue this[TKey key]
         {
             get
             {
@@ -27,7 +27,7 @@ namespace EnhancedCollections.Generic
             }
         }
 
-        public int Count
+        public virtual int Count
         {
             get
             {
@@ -35,7 +35,7 @@ namespace EnhancedCollections.Generic
             }
         }
 
-        public bool IsReadOnly
+        public virtual bool IsReadOnly
         {
             get
             {
@@ -43,7 +43,7 @@ namespace EnhancedCollections.Generic
             }
         }
 
-        public ICollection<TKey> Keys
+        public virtual ICollection<TKey> Keys
         {
             get
             {
@@ -51,7 +51,7 @@ namespace EnhancedCollections.Generic
             }
         }
 
-        public ICollection<TValue> Values
+        public virtual ICollection<TValue> Values
         {
             get
             {
@@ -59,52 +59,52 @@ namespace EnhancedCollections.Generic
             }
         }
 
-        public void Add(KeyValuePair<TKey, TValue> item)
+        public virtual void Add(KeyValuePair<TKey, TValue> item)
         {
             _decorated.Add( item);
         }
 
-        public void Add(TKey key, TValue value)
+        public virtual void Add(TKey key, TValue value)
         {
             _decorated.Add( key, value);
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
             _decorated.Clear();
         }
 
-        public bool Contains(KeyValuePair<TKey, TValue> item)
+        public virtual bool Contains(KeyValuePair<TKey, TValue> item)
         {
             return _decorated.Contains( item);
         }
 
-        public bool ContainsKey(TKey key)
+        public virtual bool ContainsKey(TKey key)
         {
             return _decorated.ContainsKey( key);
         }
 
-        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        public virtual void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
             _decorated.CopyTo( array, arrayIndex);
         }
 
-        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        public virtual IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
             return _decorated.GetEnumerator();
         }
 
-        public bool Remove(KeyValuePair<TKey, TValue> item)
+        public virtual bool Remove(KeyValuePair<TKey, TValue> item)
         {
             return _decorated.Remove(item);
         }
 
-        public bool Remove(TKey key)
+        public virtual bool Remove(TKey key)
         {
             return _decorated.Remove( key);
         }
 
-        public bool TryGetValue(TKey key, out TValue value)
+        public virtual bool TryGetValue(TKey key, out TValue value)
         {
             return _decorated.TryGetValue( key, out value);
         }
