@@ -40,13 +40,13 @@ namespace EnhancedCollections.Test.Generic
         {
             var mock = GetMock<int, int>();
 
-            mock.SetupSet( m => m[It.IsAny<int>()] = It.IsAny<int>());
+            mock.SetupSet( m => m[5] = 5);
 
             var decorator = GetDecorator( mock.Object);
 
             decorator[5] = 5;
 
-            mock.VerifySet( m => m[It.IsAny<int>()] = It.IsAny<int>(), Times.Once);
+            mock.VerifySet( m => m[5] = 5, Times.Once);
         }
 
         [Fact]
