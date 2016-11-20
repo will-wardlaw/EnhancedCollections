@@ -137,7 +137,17 @@ namespace EnhancedCollections.Test.Generic
         [Fact]
         public void CallDecoratedNonGenericGetEnumerator()
         {
-            CallDecoratedMethod< int, int, IEnumerator>( d => (d as IEnumerable).GetEnumerator());
+            var mock = GetMock<int, int>();
+
+            var nonGeneric = mock.As<IEnumerable>();
+
+            nonGeneric.Setup( d => d.GetEnumerator());
+
+            var decorator = GetDecorator( mock.Object);
+
+            (decorator as IEnumerable).GetEnumerator();
+
+            nonGeneric.Verify( d => d.GetEnumerator());
         }
         
 
