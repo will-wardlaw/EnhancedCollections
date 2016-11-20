@@ -7,6 +7,7 @@
     "System.Runtime.Serialization.Primitives": "4.1.1",
     "xunit": "2.1.0",
     "dotnet-test-xunit": "1.0.0-rc2-192208-24",
+    "moq.netcore": "4.4.0-beta8",
     "EnhancedCollections": {
       "target": "project"
     }
@@ -18,7 +19,8 @@
         "Microsoft.NETCore.App": {
           "type": "platform",
           "version": "1.0.1"
-        }
+        },
+        "System.Diagnostics.TraceSource": "4.0.0-rc2-24027"
       },
       "imports": [
         "dotnet5.4",
