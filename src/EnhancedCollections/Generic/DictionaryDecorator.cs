@@ -111,7 +111,7 @@ namespace EnhancedCollections.Generic
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _decorated.GetEnumerator();
+            return (_decorated as IEnumerable).GetEnumerator();
         }
     }
 }
