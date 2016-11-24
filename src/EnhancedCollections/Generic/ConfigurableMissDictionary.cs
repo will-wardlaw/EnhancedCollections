@@ -5,22 +5,22 @@ namespace EnhancedCollections.Generic
 {
     public class ConfigurableMissDictionary<TKey, TValue> : DictionaryDecorator<TKey, TValue>
     {
-
-        public ConfigurableMissDictionary( ) : base( new Dictionary<TKey, TValue>())
-        {
-            // Intentionally blank.
-        }
-
-        public ConfigurableMissDictionary( IDictionary<TKey, TValue> decorated) : base( decorated)
-        {
-            // Intentionally blank.
-        }
-
         public delegate TValue DictionaryMissHandler( TKey missedKey);
 
-        public event DictionaryMissHandler MissedOnIndexGet;
+        private DictionaryMissHandler _missedOnIndexGet;
 
-        public event DictionaryMissHandler MissedOnTryGetValue;
+        private event DictionaryMissHandler _missedOnTryGetValue;
+
+        public ConfigurableMissDictionary( IDictionary<TKey, TValue> decorated, DictionaryMissHandler missedHandler) : this( decorated, missedHandler, missedHandler)
+        {
+            //Intentionally blank.
+        }
+
+        public ConfigurableMissDictionary( IDictionary<TKey, TValue> decorated, DictionaryMissHandler missedOnIndexGet, DictionaryMissHandler missedOnTryGetValue) : base( decorated)
+        {
+            _missedOnIndexGet = missedOnIndexGet;
+            _missedOnTryGetValue = missedOnTryGetValue;
+        }     
 
         private TValue GetValue( DictionaryMissHandler missHandler, TKey key)
         {
@@ -42,17 +42,15 @@ namespace EnhancedCollections.Generic
         public override TValue this[TKey key]
         {
             get {
-                return GetValue( MissedOnIndexGet, key);
+                return GetValue( _missedOnIndexGet, key);
             }
-
         }
 
         public override bool TryGetValue( TKey key, out TValue val)
         {
-            val = GetValue( MissedOnIndexGet, key);
+            val = GetValue( _missedOnTryGetValue, key);
 
             return true;
         }
-        
     }
 }
